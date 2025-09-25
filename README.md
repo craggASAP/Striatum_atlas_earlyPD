@@ -84,7 +84,7 @@ The repository is organized as follows:
 ------------------
 ## Data Availability
 
-The raw mouse and human sequencing data are available on the ASAP CRN Cloud repository ([mouse ST](https://cloud.parkinsonsroadmap.org/collections/prod-cragg-mouse-spatial-visium-striatum/overview), [mouse snRNA-seq](https://cloud.parkinsonsroadmap.org/collections/prod-cragg-mouse-sn-rnaseq-striatum/overview),[human sequencing](https://cloud.parkinsonsroadmap.org/collections/jakobsson-20/overview)). Processed matrices and analyzed datasets for snRNA seq will be available on the CZ CELLxGENE Discover platform upon publication.
+The raw mouse and human sequencing data are available on the ASAP CRN Cloud repository ([mouse ST](https://cloud.parkinsonsroadmap.org/collections/prod-cragg-mouse-spatial-visium-striatum/overview), [mouse snRNA-seq](https://cloud.parkinsonsroadmap.org/collections/prod-cragg-mouse-sn-rnaseq-striatum/overview),[human snRNA-seq](https://cloud.parkinsonsroadmap.org/collections/jakobsson-20/overview)). Processed matrices and analyzed datasets for snRNA seq will be available on the CZ CELLxGENE Discover platform upon publication.
 
 Detailed information on which raw mouse or human data and associated scripts were used for each figure shown in the study "A molecular atlas of cell types in the mouse and human parkinsonian striatum" can be found in a README file at [Zenodo](https://doi.org/10.5281/zenodo.15065317). 
 
