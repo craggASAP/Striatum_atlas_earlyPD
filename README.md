@@ -79,7 +79,7 @@ If you use this code in your research, please cite the following:
 
 A molecular atlas of cell-type specific signatures in the parkinsonian striatum. Authors: Marta Graziano, Ioannis Mantas, Yuvarani Masarapu, Solène Frapard, Raquel Garza, Anita Adami, Shaline Fazal, Annelies Quaegebeur, Roger Barker, Johan Jakobsson, Stefania Giacomello and Konstantinos Meletis
 
-The code is also archived on [Zenodo]()
+The code is also archived on [Zenodo](https://doi.org/10.5281/zenodo.17235184).
 
 This repository is released under the [MIT License](https://opensource.org/license/mit) - see the [LICENSE](LICENSE) file for details.
 
