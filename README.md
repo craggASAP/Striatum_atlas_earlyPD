@@ -1,9 +1,9 @@
 <div align="center">
-    <h2><strong>A molecular atlas of cell types in the mouse and human parkinsonian striatum</strong></h2>
+    <h2><strong>A molecular atlas of cell-type specific signatures in the parkinsonian striatum</strong></h2>
     <img src="snRNA seq/Githhub_image.png" alt="Description of the image" width="600" />
 </div>
 
-<p align="justify">Parkinson’s disease (PD) is defined by progressive dopaminergic neuron loss, disrupting the function of dopamine receptor-expressing neurons in the basal ganglia. Beyond this, the transcriptional and spatial changes in diverse striatal cell types during PD progression remain unclear. Our study combines spatial transcriptomics and single-nucleus RNA sequencing in mild and progressive PD mouse models and human postmortem tissue to map the cell-type-specific effects of dopamine degeneration. We found that both neurons and glial cells exhibit significant transcriptomic changes, with glial cells showing early and prominent effects. In mice, oligodendrocytes are the most affected glial population, whereas astrocytes display the greatest alterations in human tissue. A distinct subtype of striatal projection neurons, eccentric SPNs (eSPNs), along with Chst9+ direct-pathway spiny projection neurons (dSPNs), exhibit notable resilience to dopamine loss in mouse models and during early Braak pathology in human patients. Interestingly, while Chst9+ dSPNs maintain resilience across all Braak stages and mouse models, eSPNs show increased vulnerability as Braak stages progress and as dopamine depletion advances in the dopamine-specific mitochondrial deficiency model (MitoPark mice). This study highlights the dynamic shifts in cell states within the parkinsonian striatum, offering valuable insights into disease progression and neuronal resilience.This resource establishes the dynamic landscape of cell states in the parkinsonian striatum.</p>
+<p align="justify">The progressive degeneration of dopaminergic projections to the striatum is a key disease mechanism in Parkinson’s disease (PD). Here we show a detailed cellular landscape in the parkinsonian striatum, by mapping the cell-type specific transcriptional landscape in early and progressive PD mouse models and in human PD stages. Our analyses revealed substantial transcriptomic changes across both neuronal and glial populations, with astrocytes and oligodendrocytes exhibiting distinct disease-associated gene expression profiles. Notably, our analyses revealed that striatal projection neuron (SPN) transcriptional responses to progressive DA depletion and PD-associated Braak pathology are structured along a canonical-non-canonical axis, with the non-canonical population comprising eccentric SPNs (eSPNs) and SPN-NUDAPs. This cross-species resource establishes a comprehensive framework for investigating cell-state dynamics in the parkinsonian striatum and uncovers highly and weakly transcriptionally responsive cell types that can inspire new therapeutic strategies.</p>
 
 ------------------
 ## Contents
@@ -18,7 +18,7 @@
 ------------------
 ## Project Overview
 
-This repository contains scripts used to (1) analyse and plot single-nucleus RNA sequencing (snRNA-seq) data for cell-specific transcriptomic changes in the striatum from Parkinson's Disease (PD) mouse models and human tissue; (2) analyse and plot spatial transcriptomics (ST) data to map regional vulnerabilities within the striatum, and perform differential expression for both snRNA-seq data and ST data; and (3) apply computational models for trajectory inference and pseudotime analyse using snRNA seq data. The scripts were custom-written by Marta Graziano from [Meletis Lab](https://ki.se/en/research/research-areas-centres-and-networks/research-groups/konstantinos-meletis-group#tab-research-focus) and Yuvarani Masarapu from [Giacomello Lab](https://www.spatialresearch.org/research-giacomello-lab/) and used in the study "A molecular atlas of cell types in the mouse and human parkinsonian striatum." The scripts from Giacomello Lab are also available on their [GitHub repository](https://github.com/giacomellolab/EarlyParkinsons_Striatum_Atlas.git).
+<p align="justify">This repository contains scripts used to (1) analyze and plot single-nucleus RNA sequencing (snRNA-seq) data for cell-specific transcriptomic changes in the striatum from Parkinson's Disease (PD) mouse models and human tissue; (2) process and visualize spatial transcriptomics (ST) data to map regional vulnerabilities within the striatum; (3) perform differential expression and pseudotime trajectory analyses for specific cell types, particularly focusing on astrocytes, oligodendrocytes, and spiny projection neurons (SPNs); (4) apply computational models for trajectory inference and pseudotime analyses; and (5) perform co-expression network analysis (hdWGCNA) of SPN subclusters, Gene Ontology enrichment, mapping of snRNA-seq SPN subtypes onto ST data (Tangram) and pseudobulk differential expression of ST data (DESeq2). The bar plots, violin plots and other graphs shown in the figures are generated by these scripts from the deposited data (see [Data Availability](#data-availability)). These scripts were custom-written by Marta Graziano and used in the study "A molecular atlas of cell-type specific signatures in the parkinsonian striatum."</p>
 
 ------------------
 ## System Requirements
@@ -26,10 +26,11 @@ This repository contains scripts used to (1) analyse and plot single-nucleus RNA
 The code in this repository is designed to run on systems capable of supporting:
 
 - R (version 4.1.3 or later)
-- Required R Packages: libraries in the file library.R in the folder **snRNA seq/**
 - Python (version 3.8 or later)
-- Seurat (version 4.0.1 or later) for downstream data analysis
-- Unix-like system to run shell scripts for Cell Ranger and Space Ranger
+- Seurat (version 4.0.1 or later) for downstream data analysis.
+- Required R Packages: libraries in the file libraries.R in the folder **snRNA seq/**
+- hdWGCNA (v0.1.1) and WGCNA for co-expression network analysis, clusterProfiler (v4.6.0) for GO enrichment, DESeq2 for pseudobulk differential expression.
+- tangram-sc (v1.0.3) and scanpy (Python) for the mapping of snRNA-seq data onto ST data.
 
 ------------------
 ## Hardware Requirements
@@ -45,56 +46,42 @@ The computational requirements to run the analyses are well within the capacity 
 
 The repository is organized as follows:
 
-- Folder **snRNA_seq/** contains scripts to <i>generate gene count matrices, perform downstream analysis, and produce plots </i> of single-cell RNA sequencing data obtained from Chromium technology:
-    - **cellXgene/**: Python and R scripts to format and convert the data for [CZ CELLxGENE Discover](https://cellxgene.cziscience.com/) platform.
-        - **cellXgene/gene_matrix_creation_for_mapmycell.ipynb**
-        - **cellXgene/Dataset_fix_for_cellxgene_mouse.R**
-        - **cellXgene/Dataset_fix_for_cellxgene_human.R**
-    - **/MapMyCell/**: Python script used to convert the expression matrix extracted from the seurat object to map the cells to Allen tool [MapMyCells](https://portal.brain-map.org/atlases-and-data/bkp/mapmycells)
-        - **MapMyCell/gene_matrix_creation_for_mapmycell.ipynb**.
-    - **/Mouse datasets/**: R scripts to analyse and generate plots using mouse full datasets shown in Figure 1 and 2, and mouse subclustering datasets shown in Figure 3.
-        - **Mouse Datasets/Analysis_full_dataset**
-        - **Mouse Datasets/Sub_clustering_SPNs_mouse**
-    - **/Human datasets/**: R scripts to analyse and generate plots for human full datasets shown in Figure 1 and 5, and human subclustering datasets shown in Figure 6.
-        - **Human Datasets/Analysis_full_dataset**
-        - **Human Datasets/Sub_clustering_SPNs_human**
-    - **/Cell_Ranger/**: Shell scripts (also available at [Giacomello GitHub](https://github.com/giacomellolab/EarlyParkinsons_Striatum_Atlas/tree/e93711259786f1619879188beb27a51a13d047cb/snRNAseq/Processing_Scripts)) to generate gene count matrices using the 10x Genomics Cell Ranger software (10x Genomics Cell Ranger v7.1.0).
-        - **Cell_Ranger/cellranger_run_loop.sh**
-        - **Cell_Ranger/run_cr_230619.sh**
-        - **Cell_Ranger/run_cr_count_2023-06-26.sh**
- 
-- Folder **SpatialTranscriptomics/** contains scripts (also available at [Giacomello GitHub](https://github.com/giacomellolab/EarlyParkinsons_Striatum_Atlas/tree/main/SpatialTranscriptomics)) to <i>generate gene count matrices, perform downstream analysis, and produce plots </i> of spatial transcriptomic data obtained from Visium technology:
-    - **/Space_Ranger/**: Shell scripts to generate gene count matrices using the 10x Genomics Space Ranger pipeline (10x Genomics Space Ranger v1.3.1).
-        - **Space_Ranger/run_spaceranger.sh**
-        - **Space_Ranger/run_all_sr_setup.sh**
-        - **Space_Ranger/example_spaceranger_run.sh**
-    - **/Analysis/**: R scripts to analyse mouse and human datasets.
-        - **Analysis/1_add_metadata_parkinsons.Rmd**
-        - **Analysis/2_quality_check_filtering_parkinsons.Rmd**
-        - **Analysis/3_normalisation_parkinsons.Rmd**
-        - **Analysis/4_clusterin_analysis_main_parkinsons.Rmd**
-    - **/Plots/**: R scripts to generate plots shown in Figure 4.
-        - **Plots/ST_figures_parkinsons_6OHDA.Rmd**
-        - **Plots/ST_figures_parkinsons_6OHDA_from-subclusters.Rmd**
+- Folder **snRNA seq/** contains scripts for <i>analyzing single-nucleus RNA sequencing data</i>:
+    - **Conversion from anndata for cellxgene.ipynb**, **Dataset_fix_for_cellxgene_mouse.R** and **Dataset_fix_for_cellxgene_human.R**: Python and R scripts used to format and convert the data for CellXGene resource (https://cellxgene.cziscience.com/).
+    - **gene_matrix_creation_for_mapmycell.ipynb**: Python script used to convert the expression matrix extracted from the seurat object to map the cells to Allen tool MapMyCells (https://portal.brain-map.org/atlases-and-data/bkp/mapmycells).
+    - **snRNA seq/Mouse datasets**: Scripts to analyze and generate figures for mouse datasets. Divided in two subfolders for analysis of the full dataset (**snRNA seq/Mouse datasets/Analysis_full_dataset**), for figure 1 and 2, and subclustering (**snRNA seq/Mouse datasets/Sub_clustering_SPNs_mouse**) for figure 3.
+    - **snRNA seq/Human datasets**: Scripts to analyze and generate figures for human datasets. Divided in two subfolders for analysis of the full dataset (**snRNA seq/Human datasets/Analysis_full_dataset**), for figure 1 and 5, and subclustering (**snRNA seq/Human datasets/Sub_clustering_SPNs_human**) for figure 6.
 
-- Folder **Trajectory_Inference/** contains R scripts for <i> pseudotime and trajectory analyses </i> for human and mouse datasets.
-    - **Trajectory_Inference/Trajectory analysis human.R**
-    - **Trajectory_Inference/Trajectory analysis mouse.R**
- 
+- Folder **Downstream analysis/** contains scripts for the <i>downstream analyses added in the revision</i>:
+    - **Downstream analysis/hdWGCNA/hdWGCNA_SPN_mouse.Rmd**: hdWGCNA co-expression network of mouse SPN subclusters (control, 6-OHDA, MitoPark): module eigengenes, differential module eigengenes, module load and module eigengene violin plots, for figure 3G–J.
+    - **Downstream analysis/hdWGCNA/hdWGCNA_SPN_human.Rmd**: hdWGCNA co-expression network of human putamen SPN subclusters (non-PD, Braak 4, Braak 6): module eigengene UMAPs, differential module eigengenes, module load and module eigengene violin plots, for figure 6G–J.
+    - **Downstream analysis/GO/GO_enrichment_mouse_DEGs.R**: GO Molecular Function enrichment (clusterProfiler) of up- and downregulated DEGs per mouse cell type, for figure 2 and 3.
+    - **Downstream analysis/Tangram/tangram_mapping.py**: Tangram mapping (cluster mode) of snRNA-seq SPN subtypes onto Visium sections, mapping validation and enrichment per spatial cluster, for figure 4B and supplementary figure 8A–B.
+    - **Downstream analysis/DESeq2/DESeq2_ST_pseudobulk_pooled.R**: pseudobulk DESeq2 of the striatal ST clusters 4, 5 and 8 pooled per mouse (mild 6-OHDA vs control), for supplementary table S3.
+
+- Folder **Trajectory_Inference/** contains R scripts for <i>pseudotime and trajectory analyses</i> for human and mouse datasets in figures 2, 3, 5 and 6.
+
+- https://github.com/giacomellolab/EarlyParkinsons_Striatum_Atlas/tree/main/SpatialTranscriptomics contains scripts to <i>analyze and generate figures of spatial transcriptomics datasets</i> for figure 4.
+
 ------------------
 ## Data Availability
 
-The raw mouse and human sequencing data are available on the ASAP CRN Cloud repository ([mouse ST](https://cloud.parkinsonsroadmap.org/collections/prod-cragg-mouse-spatial-visium-striatum/overview), [mouse snRNA-seq](https://cloud.parkinsonsroadmap.org/collections/prod-cragg-mouse-sn-rnaseq-striatum/overview),[human snRNA-seq](https://cloud.parkinsonsroadmap.org/collections/jakobsson-20/overview)). Processed matrices and analyzed datasets for snRNA seq will be available on the CZ CELLxGENE Discover platform upon publication.
+The mouse snRNA-seq and spatial transcriptomics data generated in this study have been deposited in the GEO database under accession codes [GSE298848](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE298848) (snRNA-seq) and [GSE298680](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE298680) (spatial transcriptomics). They are also available in the ASAP CRN Cloud (snRNA-seq: https://doi.org/10.5281/zenodo.15400040; spatial transcriptomics: https://doi.org/10.5281/zenodo.15428116).
 
-Detailed information on which raw mouse or human data and associated scripts were used for each figure shown in the study "A molecular atlas of cell types in the mouse and human parkinsonian striatum" can be found in a README file at [Zenodo](https://doi.org/10.5281/zenodo.15065317). 
+The raw human post-mortem snRNA-seq data are available under restricted access because they derive from human donors and are subject to donor consent and data-protection conditions. Access can be obtained through a data access request on the ASAP CRN Cloud (dataset jakobsson-pmdbs-sn-rnaseq-v2; https://doi.org/10.5281/zenodo.15162835), following the instructions in the CRN Cloud User Manual.
+
+The processed human and mouse count matrices and annotated objects are publicly available on [CZ CELLxGENE Discover](https://cellxgene.cziscience.com/collections/a42ba860-a1b2-46db-ba81-163f1c28d4ef).
 
 ------------------
 ## License and Citation
 
 If you use this code in your research, please cite the following:
 
-A molecular atlas of cell types in the mouse and human parkinsonian striatum. (2025). Authors: Marta Graziano, Ioannis Mantas, Yuvarani Masarapu, Solène Frapard, Raquel
-Garza, Anita Adami, Shaline Fazal, Annelies Quaegebeur, Roger Barker, Johan Jakobsson, Stefania Giacomello and Konstantinos Meletis
+A molecular atlas of cell-type specific signatures in the parkinsonian striatum. Authors: Marta Graziano, Ioannis Mantas, Yuvarani Masarapu, Solène Frapard, Raquel Garza, Anita Adami, Shaline Fazal, Annelies Quaegebeur, Roger Barker, Johan Jakobsson, Stefania Giacomello and Konstantinos Meletis
+
+The code is also available at https://github.com/craggASAP/Striatum_atlas_earlyPD and archived on Zenodo:
+
+Graziano, M. et al. A molecular atlas of cell-type specific signatures in the parkinsonian striatum – analysis code. Zenodo https://doi.org/10.5281/zenodo.15065317 (2026).
 
 This repository is released under the [MIT License](https://opensource.org/license/mit) - see the [LICENSE](LICENSE) file for details.
 
