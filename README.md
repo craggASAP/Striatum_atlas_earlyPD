@@ -66,7 +66,7 @@ The repository is organized as follows:
 ------------------
 ## Data Availability
 
-The mouse snRNA-seq and spatial transcriptomics data generated in this study have been deposited in the GEO database under accession codes [GSE298848](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE298848) (snRNA-seq) and [GSE298680](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE298680) (spatial transcriptomics). They are also available in the ASAP CRN Cloud ([snRNA-seq](https://doi.org/10.5281/zenodo.15400040) and [spatial transcriptomics](https://doi.org/10.5281/zenodo.15428116).
+The mouse snRNA-seq and spatial transcriptomics data generated in this study have been deposited in the GEO database under accession codes [GSE298848](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE298848) (snRNA-seq) and [GSE298680](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE298680) (spatial transcriptomics). They are also available in the ASAP CRN Cloud ([snRNA-seq](https://doi.org/10.5281/zenodo.15400040) and [spatial transcriptomics](https://doi.org/10.5281/zenodo.15428116)).
 
 The raw human post-mortem snRNA-seq data are available under restricted access because they derive from human donors and are subject to donor consent and data-protection conditions. Access can be obtained through a data access request on the ASAP CRN Cloud ([dataset jakobsson-pmdbs-sn-rnaseq-v2](https://doi.org/10.5281/zenodo.15162835), following the instructions in the CRN Cloud User Manual.
 
